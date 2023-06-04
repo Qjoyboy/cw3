@@ -1,5 +1,6 @@
 import json
 
+"""Прятчет циферки карт, заменяя их на звездочки. """
 def hide_ciferki(card_info):
     if card_info.startswith('Visa Classic') or card_info.startswith('Maestro'):
         card_info = card_info.split()
@@ -15,10 +16,11 @@ def hide_ciferki(card_info):
 
         return ' '.join(card_info[:-1] + [hide_number])
 
+"""изменяет дату на читабельную"""
 def change_data(date):
 
     return '.'.join(date[:10].split('-')[::-1])
-
+"""выводит данные в читабельном виде"""
 def show_trans(operation):
 
     output = f"""{change_data(operation['date'])} Перевод организации 
@@ -27,7 +29,7 @@ def show_trans(operation):
 
     print(output)
 
-
+"""Основная функция. Загружает данные, читает и выводит последние 5."""
 def main():
     with open("data/operations.json", encoding='utf-8') as file:
         data = json.load(file)
@@ -38,4 +40,5 @@ def main():
     for operation in data[:5]:
         show_trans(operation)
 
-main()
+if __name__ == "__main__":
+    main()
